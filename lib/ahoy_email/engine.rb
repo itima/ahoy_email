@@ -3,6 +3,9 @@ module AhoyEmail
 
     initializer "ahoy_email" do |app|
       AhoyEmail.secret_token = app.config.respond_to?(:secret_key_base) ? app.config.secret_key_base : app.config.secret_token
+      if AhoyEmail.blank?
+		    AhoyEmail.secret_token = Rails.application.secrets.secret_key_base
+	    end
     end
 
   end
