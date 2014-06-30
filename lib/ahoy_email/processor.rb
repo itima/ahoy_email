@@ -139,7 +139,7 @@ module AhoyEmail
     end
 
     def url_for(options)
-      AhoyEmail::Engine.routes.url_helpers.url_for((ActionMailer::Base.default_url_options || {}).merge(options))
+      AhoyEmail::Engine.routes.url_for((ActionMailer::Base.default_url_options || {}).merge(options))
     end
 
     # not a fan of quiet errors
