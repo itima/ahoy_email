@@ -23,7 +23,7 @@ module AhoyEmail
         ahoy_message.content = message.to_s if ahoy_message.respond_to?(:content=)
 
         ahoy_message.save
-        message["Ahoy-Message-Id"] = ahoy_message.id
+        message["Ahoy-Message-Id"] = ahoy_message.id.to_s
       end
     rescue => e
       report_error(e)
@@ -90,7 +90,7 @@ module AhoyEmail
         body = (message.html_part || message).body
 
         doc = Nokogiri::HTML(body.raw_source)
-        doc.css("a").each do |link|
+        doc.css("a[href]").each do |link|
           # utm params first
           if options[:utm_params] and !skip_attribute?(link, "utm-params")
             uri = Addressable::URI.parse(link["href"])
