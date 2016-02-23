@@ -1,3 +1,20 @@
+## 0.3.0
+
+- Added safely for error reporting
+- Fixed error with `to`
+- Prevent duplicate records when mail called multiple times
+
+## 0.2.4
+
+- Added `extra` option for extra attributes
+
+## 0.2.3
+
+- Save utm parameters
+- Added `url_options`
+- Skip tracking for `mailto` links
+- Only set secret token if not already set
+
 ## 0.2.2
 
 - Fixed secret token for Rails 4.1

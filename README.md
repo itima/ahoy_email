@@ -114,6 +114,24 @@ Use `track utm_params: false` to skip tagging, or skip specific links with:
 <a data-skip-utm-params="true" href="...">Break it down</a>
 ```
 
+### Extra Attributes
+
+Create a migration to add extra attributes to the `ahoy_messages` table, for example:
+
+```ruby
+class AddCampaignIdToAhoyMessages < ActiveRecord::Migration
+  def change
+    add_column :ahoy_messages, :campaign_id, :integer
+  end
+end
+```
+
+Then use:
+
+```ruby
+track extra: {campaign_id: 1}
+```
+
 ## Customize
 
 ### Tracking
@@ -206,11 +224,23 @@ Or by default
 AhoyEmail.track message: false
 ```
 
+Customize domain
+
+```ruby
+track url_options: {host: "mydomain.com"}
+```
+
 Use a different model
 
 ```ruby
 AhoyEmail.message_model = UserMessage
 ```
+
+## Upgrading
+
+### 0.2.3
+
+Optionally, you can store UTM parameters by adding `utm_source`, `utm_medium`, and `utm_campaign` columns to your message model.
 
 ## History
 

@@ -3,7 +3,7 @@ module Ahoy
     before_filter :set_message
 
     def open
-      if @message and !@message.opened_at
+      if @message && !@message.opened_at
         @message.opened_at = Time.now
         @message.save!
       end
@@ -12,12 +12,12 @@ module Ahoy
     end
 
     def click
-      if @message and !@message.clicked_at
+      if @message && !@message.clicked_at
         @message.clicked_at = Time.now
         @message.opened_at ||= @message.clicked_at
         @message.save!
       end
-      url = params[:url]
+      url = params[:url].to_s
       signature = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha1"), AhoyEmail.secret_token, url)
       publish :click, url: params[:url]
       if secure_compare(params[:signature], signature)
@@ -54,6 +54,5 @@ module Ahoy
       b.each_byte { |byte| res |= byte ^ l.shift }
       res == 0
     end
-
   end
 end
